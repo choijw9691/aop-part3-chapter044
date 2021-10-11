@@ -2,13 +2,18 @@ package com.example.aop_part3_chapter04.api
 
 import com.example.aop_part3_chapter04.model.SearchBooksDto
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 interface BookAPI {
-    @GET("v1/search/book.json?query=%EC%A3%BC%EC%8B%9D&display=10")
-    fun getBookList(): Call<SearchBooksDto>
+
+
+    @GET("v1/search/book.json")
+    fun getBookList(@Header("X-Naver-Client-Id") Id:String,
+    @Header("X-Naver-Client-Secret")Secret:String,
+    @Query(value="query",encoded = false) query: String,
+    @Query("display") display:Int = 10,
+    ): Call<SearchBooksDto>
 
 
 
