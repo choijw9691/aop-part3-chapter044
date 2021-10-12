@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.aop_part3_chapter04.R
 import com.example.aop_part3_chapter04.databinding.ItemBookBinding
 import com.example.aop_part3_chapter04.model.SearchBooksDto
@@ -20,6 +21,10 @@ class BookAdapter : ListAdapter<book, BookAdapter.ViewHolder>(diffUtil) {
         fun bind(bookModel: book) {
             binding.titleTextView.text = bookModel.title
             binding.descriptionTextView.text = bookModel.description
+            Glide.with(binding.coverImageView.context).load(bookModel.image)
+                .into(binding.coverImageView)
+
+
         }
 
     }

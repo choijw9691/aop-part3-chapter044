@@ -12,7 +12,7 @@ interface BookAPI {
     fun getBookList(@Header("X-Naver-Client-Id") Id:String,
     @Header("X-Naver-Client-Secret")Secret:String,
     @Query(value="query",encoded = false) query: String,
-    @Query("display") display:Int = 10,
+    @Query("display") display:Int = 20,
     ): Call<SearchBooksDto>
 
 

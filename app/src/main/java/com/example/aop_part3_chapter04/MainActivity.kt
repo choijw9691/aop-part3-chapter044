@@ -3,6 +3,7 @@ package com.example.aop_part3_chapter04
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.aop_part3_chapter04.adapter.BookAdapter
 import com.example.aop_part3_chapter04.api.BookAPI
 import com.example.aop_part3_chapter04.databinding.ActivityMainBinding
@@ -27,9 +28,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        setContentView(binding.root)
+
 
         val adapter = BookAdapter()
+
+        binding.recyclerView.layoutManager= LinearLayoutManager(this)
+        binding.recyclerView.adapter=adapter
+
+        setContentView(binding.root)
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://openapi.naver.com/")
@@ -49,15 +55,15 @@ class MainActivity : AppCompatActivity() {
                     response: Response<SearchBooksDto>
                 ) {
 
-                    Log.d("senderror1",response.body().toString())
+
 
                     if (response.isSuccessful.not()) {
                         return
                     }
                     response.body()?.let {
 
-
                         adapter.submitList(it.items)
+                        Log.d("senderror1", it.items.toString())
                     }
                 }
 
